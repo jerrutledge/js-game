@@ -207,10 +207,16 @@ var animate = function() {
 		walls[i].draw(); 
 	};
 	time += 0.1;
-	if (time % 3.0 >1.5){
+	if (time % 6.2 < 1.5){
 		ctx.font = "40px Georgia";
 		ctx.fillStyle = "#000000"; 
 		ctx.fillText("HI!",100,100);
+	}
+
+	if (time % 6.2 > 3 && time % 6.2 < 4.5){
+		ctx.font = "40px Georgia";
+		ctx.fillStyle = "#000000"; 
+		ctx.fillText("BYE!",200,200);
 	}
 
 	ctx.drawImage(chSprite[frame], x-300*Math.sin(time), y-300*Math.sin(time));
