@@ -63,16 +63,16 @@ var imageOnLoad = function() {
 }; 
 
 var walkright = new Array(
-	"smiley.png",
-	"smiley.png",
-	"smiley.png",
-	"smiley.png"
+	"smiley.svg",
+	"smiley.svg",
+	"smiley.svg",
+	"smiley.svg"
 ); 
 var walkleft = new Array(
-	"smiley.png",
-	"smiley.png",
-	"smiley.png",
-	"smiley.png"
+	"smiley.svg",
+	"smiley.svg",
+	"smiley.svg",
+	"smiley.svg"
 ); 
 
 var rightw = new Array(); 
@@ -207,11 +207,13 @@ var animate = function() {
 		walls[i].draw(); 
 	};
 	time += 0.1;
-	ctx.drawImage(chSprite[frame], x-300*Math.sin(time), y-300*Math.sin(time));
-	if (time % 3.0 == 0){
+	if (time % 3.0 >1.5){
 		ctx.font = "40px Georgia";
+		ctx.fillStyle("#000000"); 
 		ctx.fillText("HI!",0,0);
 	}
-	ctx.fillStyle="#000099";
+
+	ctx.drawImage(chSprite[frame], x-300*Math.sin(time), y-300*Math.sin(time));
+		ctx.fillStyle="#000099";
 	ctx.fillRect( x-16, y-32,50,50);
 };
