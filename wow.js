@@ -19,6 +19,8 @@ var vspeed = 0;
 var right = false; 
 var left = false; 
 var up = false; 
+//Double jumping variables
+var jumpcounts = 0;
 // Image loading & Animation
 var framin = 0; 
 var frame = 0; 
@@ -59,16 +61,16 @@ var imageOnLoad = function() {
 }; 
 
 var walkright = new Array(
-	"Lola right/Lola 1.png",
-	"Lola right/Lola 2.png",
-	"Lola right/Lola 1.png",
-	"Lola right/Lola 4.png"
+	"smiley.png",
+	"smiley.png",
+	"smiley.png",
+	"smiley.png"
 ); 
 var walkleft = new Array(
-	"Lola left/Lola 1.png",
-	"Lola left/Lola 2.png",
-	"Lola left/Lola 1.png",
-	"Lola left/Lola 4.png"
+	"smiley.png",
+	"smiley.png",
+	"smiley.png",
+	"smiley.png"
 ); 
 
 var rightw = new Array(); 
@@ -92,24 +94,24 @@ ctx.drawImage(rightw[0], x, y);
 // KEYBOARD INPUT
 document.body.onkeydown = function() {
 	//console.log("WOAH"+event.keyCode); 
-	if (event.keyCode == 39) {
+	if (event.keyCode == 68) {
 		right = true;
 	} 
-	if (event.keyCode == 38) {
+	if (event.keyCode == 87) {
 		up = true;
 	} 
-	if (event.keyCode == 37) {
+	if (event.keyCode == 65) {
 		left = true;
 	} 
 }; 
 document.body.onkeyup = function() {
-	if (event.keyCode == 39) {
+	if (event.keyCode == 68) {
 		right = false;
 	} 
-	if (event.keyCode == 38) {
+	if (event.keyCode == 87) {
 		up = false;
 	} 
-	if (event.keyCode == 37) {
+	if (event.keyCode == 65) {
 		left = false;
 	} 
 }; 
@@ -129,14 +131,16 @@ setInterval("animate();", 30);
 
 var animate = function() { 
 	// INPUT & MOVEMENT
-	if (up && !inAir) {
+	if (up && (jumpcounts < 2)) {
 		y-=5; 
 		vspeed = -11; 
 		inAir = true; 
+		jumpcounts++;
+		up = false;
 		console.log("Tried to jump");
 	}
 
-	
+
 
 	if (inAir) {
 		y+=vspeed; 
@@ -146,6 +150,7 @@ var animate = function() {
 			if (y < cc.y+cc.height) {
 				y = cc.y; 
 				inAir = false; 
+				jumpcounts = 0;
 			}
 			else {
 				y = cc.y+cc.height+32; 
@@ -199,5 +204,7 @@ var animate = function() {
 	for (var i = walls.length - 1; i >= 0; i--) {
 		walls[i].draw(); 
 	};
-	ctx.drawImage(chSprite[frame], x-16, y-32);
+	ctx.drawImage(chSprite[frame], x-200, y-500);
+	ctx.fillStyle="#000099";
+	ctx.fillRect( x-16, y-32,50,50);
 };
