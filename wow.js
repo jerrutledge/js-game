@@ -21,6 +21,8 @@ var left = false;
 var up = false; 
 //Double jumping variables
 var jumpcounts = 0;
+//TIME 
+var time = 1;
 // Image loading & Animation
 var framin = 0; 
 var frame = 0; 
@@ -131,7 +133,7 @@ setInterval("animate();", 30);
 
 var animate = function() { 
 	// INPUT & MOVEMENT
-	if (up && (jumpcounts < 2)) {
+	if (up && (jumpcounts < 3)) {
 		y-=5; 
 		vspeed = -11; 
 		inAir = true; 
@@ -204,7 +206,12 @@ var animate = function() {
 	for (var i = walls.length - 1; i >= 0; i--) {
 		walls[i].draw(); 
 	};
-	ctx.drawImage(chSprite[frame], x-200, y-500);
+	time += 0.1;
+	ctx.drawImage(chSprite[frame], x-300*Math.sin(time), y-300*Math.sin(time));
+	if (time % 3.0 == 0){
+		ctx.font = "40px Georgia";
+		ctx.fillText("HI!",0,0);
+	}
 	ctx.fillStyle="#000099";
 	ctx.fillRect( x-16, y-32,50,50);
 };
