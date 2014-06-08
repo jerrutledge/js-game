@@ -5,4 +5,4 @@ var myfunction = function() {
   document.body.appendChild(par);
   console.log("wow");
 }
-myfunction(); 
+document.onload = myfunction(); 
